@@ -9,7 +9,7 @@ namespace Code_Validator
 		{
 			int openParans = 0;
 
-			codeIn = StripComments(codeIn);
+	
 			foreach(var c in codeIn)
 			{
 				if(c == '(')
@@ -28,26 +28,12 @@ namespace Code_Validator
 					}
 				}
 			}
-
-			return openParans == 0;
-		}
-
-		public static string StripComments(string codeIn)
-		{
-			StringBuilder sb = new StringBuilder();
-			using (StringReader sr = new StringReader(codeIn))
+			if(openParans == 0)
 			{
-				string codeline;
-				while ((codeline = sr.ReadLine()) != null)
-				{
-					if(!line.Trim().StartsWith(";;"))
-					{
-						sb.AppendLine(codeline);
-					}
-				}
+				return true;
 			}
-
-			return sb.ToString();
 		}
+
+		
 	}
 }
