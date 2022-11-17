@@ -1,0 +1,53 @@
+using System.IO;
+using System.Text;
+
+namespace Code_Validator
+{
+	public class Validator
+	{
+		public static bool CheckParans(string codeIn)
+		{
+			int openParans = 0;
+
+			codeIn = StripComments(codeIn);
+			foreach(var c in codeIn)
+			{
+				if(c == '(')
+				{
+					openParans++;
+				}
+				else if(c == ')')
+				{
+					if(openParans > 0)
+					{
+						openParans--;
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+
+			return openParans == 0;
+		}
+
+		public static string StripComments(string codeIn)
+		{
+			StringBuilder sb = new StringBuilder();
+			using (StringReader sr = new StringReader(codeIn))
+			{
+				string codeline;
+				while ((codeline = sr.ReadLine()) != null)
+				{
+					if(!line.Trim().StartsWith(";;"))
+					{
+						sb.AppendLine(codeline);
+					}
+				}
+			}
+
+			return sb.ToString();
+		}
+	}
+}
